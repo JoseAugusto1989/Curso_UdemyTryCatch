@@ -30,24 +30,19 @@ public class StartApp {
 			System.out.print("Check-out date (dd/mm/yyyy): ");
 				Date checkOut = sdf.parse(scan.next());
 				
-			checkDate(number, checkIn, checkOut);
+			Reservation reserv = new Reservation(number, checkIn, checkOut);
 			
+			String error = reserv.updateDates(checkIn, checkOut);
+			if (error != null) {
+				System.out.println("Error in reservation: " + error);
 			
-			System.out.println();
+			} else {
+				System.out.println("Reservation: " + reserv);
+				
+			}
 		}
 		
 		System.out.println("\nEnd of App!!!");
-	}
-	
-	private static void checkDate(int number, Date checkIn, Date checkOut) {
-		if (! checkOut.after(checkIn)) {
-			System.out.println("\nError in reservation: Check-Out date must be after check-In date");
-			
-		} else {
-			list.add(new Reservation(number, checkIn, checkOut));
-			System.out.println("Reservation: " + list);
-			
-		}
 	}
 	
 	private static int readInteger() {
